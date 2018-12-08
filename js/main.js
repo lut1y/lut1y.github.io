@@ -1,122 +1,66 @@
-jQuery(function($) {
+jQuery(function($) {'use strict';
 
-	//Preloader
-	var preloader = $('.preloader');
-	$(window).load(function(){
-		preloader.remove();
-	});
-
-	//#main-slider
-	var slideHeight = $(window).height();
-	$('#home-slider .item').css('height',slideHeight);
-
-	$(window).resize(function(){'use strict',
-		$('#home-slider .item').css('height',slideHeight);
-	});
-	
-	//Scroll Menu
-	$(window).on('scroll', function(){
-		if( $(window).scrollTop()>slideHeight ){
-			$('.main-nav').addClass('navbar-fixed-top');
-		} else {
-			$('.main-nav').removeClass('navbar-fixed-top');
-		}
-	});
-	
-	// Navigation Scroll
-	$(window).scroll(function(event) {
-		Scroll();
-	});
-
-	$('.navbar-collapse ul li a').on('click', function() {  
-		$('html, body').animate({scrollTop: $(this.hash).offset().top - 5}, 1000);
-		return false;
-	});
-
-	// User define function
-	function Scroll() {
-		var contentTop      =   [];
-		var contentBottom   =   [];
-		var winTop      =   $(window).scrollTop();
-		var rangeTop    =   200;
-		var rangeBottom =   500;
-		$('.navbar-collapse').find('.scroll a').each(function(){
-			contentTop.push( $( $(this).attr('href') ).offset().top);
-			contentBottom.push( $( $(this).attr('href') ).offset().top + $( $(this).attr('href') ).height() );
-		})
-		$.each( contentTop, function(i){
-			if ( winTop > contentTop[i] - rangeTop ){
-				$('.navbar-collapse li.scroll')
-				.removeClass('active')
-				.eq(i).addClass('active');			
+	//Responsive Nav
+	$('li.dropdown').find('.fa-angle-down').each(function(){
+		$(this).on('click', function(){
+			if( $(window).width() < 768 ) {
+				$(this).parent().next().slideToggle();
 			}
-		})
-	};
-
-	$('#tohash').on('click', function(){
-		$('html, body').animate({scrollTop: $(this.hash).offset().top - 5}, 1000);
-		return false;
-	});
-	
-	//Initiat WOW JS
-	new WOW().init();
-	//smoothScroll
-	smoothScroll.init();
-	
-	// Progress Bar
-	$('#about-us').bind('inview', function(event, visible, visiblePartX, visiblePartY) {
-		if (visible) {
-			$.each($('div.progress-bar'),function(){
-				$(this).css('width', $(this).attr('aria-valuetransitiongoal')+'%');
-			});
-			$(this).unbind('inview');
-		}
-	});
-
-	//Countdown
-	$('#features').bind('inview', function(event, visible, visiblePartX, visiblePartY) {
-		if (visible) {
-			$(this).find('.timer').each(function () {
-				var $this = $(this);
-				$({ Counter: 0 }).animate({ Counter: $this.text() }, {
-					duration: 2000,
-					easing: 'swing',
-					step: function () {
-						$this.text(Math.ceil(this.Counter));
-					}
-				});
-			});
-			$(this).unbind('inview');
-		}
-	});
-
-	// Portfolio Single View
-	$('#portfolio').on('click','.folio-read-more',function(event){
-		event.preventDefault();
-		var link = $(this).data('single_url');
-		var full_url = '#portfolio-single-wrap',
-		parts = full_url.split("#"),
-		trgt = parts[1],
-		target_top = $("#"+trgt).offset().top;
-
-		$('html, body').animate({scrollTop:target_top}, 600);
-		$('#portfolio-single').slideUp(500, function(){
-			$(this).load(link,function(){
-				$(this).slideDown(500);
-			});
+			return false;
 		});
 	});
 
-	// Close Portfolio Single View
-	$('#portfolio-single-wrap').on('click', '.close-folio-item',function(event) {
-		event.preventDefault();
-		var full_url = '#portfolio',
-		parts = full_url.split("#"),
-		trgt = parts[1],
-		target_offset = $("#"+trgt).offset(),
-		target_top = target_offset.top;
-		$('html, body').animate({scrollTop:target_top}, 600);
-		$("#portfolio-single").slideUp(500);
+	//Fit Vids
+	if( $('#video-container').length ) {
+		$("#video-container").fitVids();
+	}
+
+	//Initiat WOW JS
+	new WOW().init();
+
+	// portfolio filter
+	$(window).load(function(){
+
+		$('.main-slider').addClass('animate-in');
+		$('.preloader').remove();
+		//End Preloader
+
+		if( $('.masonery_area').length ) {
+			$('.masonery_area').masonry();//Masonry
+		}
+
+		var $portfolio_selectors = $('.portfolio-filter >li>a');
+		
+		if($portfolio_selectors.length) {
+			
+			var $portfolio = $('.portfolio-items');
+			$portfolio.isotope({
+				itemSelector : '.portfolio-item',
+				layoutMode : 'fitRows'
+			});
+			
+			$portfolio_selectors.on('click', function(){
+				$portfolio_selectors.removeClass('active');
+				$(this).addClass('active');
+				var selector = $(this).attr('data-filter');
+				$portfolio.isotope({ filter: selector });
+				return false;
+			});
+		}
+
+	});
+
+
+	$('.timer').each(count);
+	function count(options) {
+		var $this = $(this);
+		options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+		$this.countTo(options);
+	}
+		
+	// Search
+	$('.fa-search').on('click', function() {
+		$('.field-toggle').fadeToggle(200);
 	});
 
 	// Contact form
@@ -134,30 +78,36 @@ jQuery(function($) {
 		});
 	});
 
-	//Google Map
-	var latitude = $('#google-map').data('latitude')
-	var longitude = $('#google-map').data('longitude')
-	function initialize_map() {
-		var myLatlng = new google.maps.LatLng(latitude,longitude);
-		var mapOptions = {
-			zoom: 14,
-			scrollwheel: false,
-			center: myLatlng
-		};
-		var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
-		var contentString = '';
-		var infowindow = new google.maps.InfoWindow({
-			content: '<div class="map-content"><ul class="address">' + $('.address').html() + '</ul></div>'
+	// Progress Bar
+	$.each($('div.progress-bar'),function(){
+		$(this).css('width', $(this).attr('data-transition')+'%');
+	});
+
+	if( $('#gmap').length ) {
+		var map;
+
+		map = new GMaps({
+			el: '#gmap',
+			lat: 43.04446,
+			lng: -76.130791,
+			scrollwheel:false,
+			zoom: 16,
+			zoomControl : false,
+			panControl : false,
+			streetViewControl : false,
+			mapTypeControl: false,
+			overviewMapControl: false,
+			clickable: false
 		});
-		var marker = new google.maps.Marker({
-			position: myLatlng,
-			map: map
-		});
-		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.open(map,marker);
+
+		map.addMarker({
+			lat: 43.04446,
+			lng: -76.130791,
+			animation: google.maps.Animation.DROP,
+			verticalAlign: 'bottom',
+			horizontalAlign: 'center',
+			backgroundColor: '#3e8bff',
 		});
 	}
-	google.maps.event.addDomListener(window, 'load', initialize_map);
-	
-});
 
+});
