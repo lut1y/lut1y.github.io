@@ -1,6 +1,6 @@
 <?php
-$name       = @trim(stripslashes($_POST['name'])); 
-$from       = @trim(stripslashes($_POST['email'])); 
+$name       = @trim(urldecode(htmlspecialchars($_POST['name'])));
+$from       = @trim(urldecode(htmlspecialschars($_POST['email'])));
 //$subject    = @trim(stripslashes($_POST['subject']));
 $subject    = 'Заявка с сайта';
 $message    = @trim(stripslashes($_POST['message']));
@@ -14,6 +14,12 @@ $headers[] = "Reply-To: <{$from}>";
 $headers[] = "Subject: {$subject}";
 $headers[] = "X-Mailer: PHP/".phpversion();
 
-mail($to, $subject, $message, $headers);
+if(mail($to, $message, $headers))
+{
+    echo "Сообщение успешно отправлено!"
+} else
+{
+    echo "Есть ошибки!"
+};
 
-die;
+?>
