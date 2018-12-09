@@ -1,9 +1,10 @@
 <?php
 $name       = @trim(stripslashes($_POST['name'])); 
 $from       = @trim(stripslashes($_POST['email'])); 
-$subject    = @trim(stripslashes($_POST['subject'])); 
-$message    = @trim(stripslashes($_POST['message'])); 
-$to   		= 'email@email.com';//replace with your email
+//$subject    = @trim(stripslashes($_POST['subject']));
+$subject    = 'Заявка с сайта';
+$message    = @trim(stripslashes($_POST['message']));
+$to   		= 'lut1y@mail.ru';//replace with your email
 
 $headers   = array();
 $headers[] = "MIME-Version: 1.0";
