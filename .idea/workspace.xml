@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="14f7d644-dcd4-437d-8271-89935e8a7d96" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/font-awesome.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/font-awesome.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/about-bg.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/about-bg.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/slider/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/images/slider/3.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +54,7 @@
       <workItem from="1580897109145" duration="7657000" />
       <workItem from="1580908102870" duration="11624000" />
       <workItem from="1580925747041" duration="807000" />
-      <workItem from="1587114370219" duration="6129000" />
+      <workItem from="1587114370219" duration="6840000" />
     </task>
     <task id="LOCAL-00001" summary="05/02/2020">
       <created>1580904636902</created>
@@ -101,7 +98,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580910965529</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="17/04/2020">
+      <created>1587121162118</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1587121162118</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,9 +126,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="05/02/2020" />
-    <option name="LAST_COMMIT_MESSAGE" value="05/02/2020" />
+    <MESSAGE value="17/04/2020" />
+    <option name="LAST_COMMIT_MESSAGE" value="17/04/2020" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1587121161150">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1587121161150" />
     <state x="442" y="112" key="FileChooserDialogImpl" timestamp="1587114592217">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -133,6 +142,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="163" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1587114593889" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1587121164052">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1587121164052" />
     <state x="379" y="187" key="com.intellij.ide.util.TipDialog" timestamp="1587114370594">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
